@@ -46,6 +46,10 @@ function App() {
     }
   }
 
+  /**
+   * Why the fuck would i be doing v1, v2, v3 when I have github ??
+   */
+
   return (
     <>
       <div className="parent-container">

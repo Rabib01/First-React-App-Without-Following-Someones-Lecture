@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 README.md
-src/sidenotes.js
+# src/sidenotes.js

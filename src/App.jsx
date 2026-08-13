@@ -4,27 +4,63 @@ import "./App.css";
 //  lets get cooking
 
 function App() {
-  const [transaction, setTransaction] = useState([]);
+  const [transaction, setTransaction] = useState({
+    typeOfTransaction: "",
+    amount: "",
+    modeOfTransaction: "",
+  });
+  const [transactions, setTransactions] = useState([]);
+
+  // useEffect(() => {
+  //   console.log(transaction);
+  // }, [transaction]);
+
   useEffect(() => {
-    console.log(transaction);
-  }, [transaction]);
+    console.log(transactions);
+  }, [transactions]);
+
+  function handleAmountChange(e) {
+    // This makes more fucking sense to me than using the first parenthesis notation
+    setTransaction((prev) => {
+      return {
+        ...prev,
+        amount: e.target.value,
+      };
+    });
+
+    // function ends here
+  }
+
+  function handleTypeOfTransaction(e) {
+    // console.log(e.target.value);
+    setTransaction((prev) => {
+      return {
+        ...prev,
+        typeOfTransaction: e.target.value,
+      };
+    });
+  }
+
+  function handleModeOfTransaction(e) {
+    console.log(e.target.value);
+
+    if (e.target.value) {
+      setTransaction((prev) => {
+        return {
+          ...prev,
+          modeOfTransaction: e.target.value,
+        };
+      });
+    }
+  }
 
   function handleClick(e) {
-    // console.dir(e.target);
-
     if (e.target.classList.contains("button-add")) {
-      // fucnking forgot abvout hte query selector : document.querySelector("#income-expense-container").value
-
-      setTransaction((prevState) => [
-        ...prevState,
-        {
-          numberOfTransaction: document.querySelector(
-            "#income-expense-container",
-          ).value,
-          amount: document.querySelector("#amount-container").value,
-          modeOfTransaction: document.querySelector("#income-expense").value,
-        },
-      ]);
+      if (document.querySelector("#income-expense").value !== "") {
+        setTransactions((prev) => {
+          return [...prev, transaction];
+        });
+      }
     }
   }
 
@@ -36,16 +72,30 @@ function App() {
             <span>+</span> 5000
           </h1>
         </div>
+        {/* inputs section starts  here */}
         <div onClick={handleClick} className="inputs-container">
-          {/* inputs section starts here */}
           <div className="inputs">
             <input
               type="text"
+              // {/* inputs section for typeOfTransaction */}
               id="income-expense-container"
+              onChange={handleTypeOfTransaction}
               placeholder="Income or Expense (like Salary)"
             />
-            <input type="text" id="amount-container" placeholder="Amount..." />
-            <select id="income-expense" name="income">
+            {/* inputs section for amount of transaction here */}
+            <input
+              type="text"
+              id="amount-container"
+              onChange={handleAmountChange}
+              placeholder="Amount..."
+            />
+            {/* select option */}
+            <select
+              onChange={handleModeOfTransaction}
+              id="income-expense"
+              name="income"
+            >
+              <option value=""></option>
               <option value="income">Income</option>
               <option value="expense">Expense</option>
             </select>
