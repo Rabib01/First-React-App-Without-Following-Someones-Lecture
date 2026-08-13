@@ -13,6 +13,14 @@
   font-weight: 900;
 }
 
+.positive-transaction-two {
+  color: #3aa157;
+}
+
+.negative-transaction-two {
+  color: #ff4538;
+}
+
 .inputs {
   display: flex;
   justify-content: space-between;
@@ -78,5 +86,12 @@
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 600;
   font-size: 20px;
+}
+
+.positive-transaction {
   color: #66bb6a;
+}
+
+.negative-transaction {
+  color: #f79e9c;
 }

@@ -41,6 +41,25 @@ function App() {
     });
   }
 
+  function handleHeaderAmount(arrayOfTheTransactions) {
+    // console.log(arrayOfTheTransactions);
+    const income = arrayOfTheTransactions
+      .filter((item) => item.modeOfTransaction === "income")
+      .reduce((acc, curr) => acc + curr.amount, 0);
+
+    const expense = arrayOfTheTransactions
+      .filter((item) => item.modeOfTransaction === "expense")
+      .reduce((acc, curr) => acc + curr.amount, 0);
+
+    const result = income - expense;
+
+    return result >= 0 ? (
+      <h1 className="positive-transaction-two">{`+$ ${result}`}</h1>
+    ) : (
+      <h1 className="negative-transaction-two">{`-$ ${result}`}</h1>
+    );
+  }
+
   function handleModeOfTransaction(e) {
     // console.log(e.target.value);
     if (e.target.value) {
@@ -63,9 +82,11 @@ function App() {
             <div className="date-id">{item.date}</div>
           </div>
           <div className="amount-id">
-            {item.modeOfTransaction === "income"
-              ? `+$${item.amount}`
-              : `-$${item.amount}`}
+            {item.modeOfTransaction === "income" ? (
+              <div className="amount-id positive-transaction">{`+$${item.amount}`}</div>
+            ) : (
+              <div className="amount-id negative-transaction">{`-$${item.amount}`}</div>
+            )}
           </div>
         </div>
       );
@@ -111,10 +132,11 @@ function App() {
   return (
     <>
       <div className="parent-container">
+        {/* The only work that is left for me to do now */}
         <div className="amount-container">
-          <h1>
-            <span>+</span> 5000
-          </h1>
+          {/* <h1 className="positive-transaction-two">+ 5000</h1>
+          Do something here */}
+          {handleHeaderAmount(transactions)}
         </div>
         {/* inputs section starts  here */}
         <div onClick={handleClick} className="inputs-container">
@@ -149,13 +171,6 @@ function App() {
         {/* markup section starts here */}{" "}
         {/* This is the part of Ui that I need to change withing each iteration of the transactions state */}
         <div className="transaction-ui-container">
-          <div className="transaction-ui-items">
-            <div className="expense-date-container">
-              <div className="expense-id">Salary</div>
-              <div className="date-id">Thu Aug 13 2026</div>
-            </div>
-            <div className="amount-id">+$ 5000.00</div>
-          </div>
           {addItemsToUI(transactions)}
         </div>
         {/* This div ends here */}
