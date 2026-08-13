@@ -286,3 +286,61 @@ A single React line can contain arrow functions + objects + spread + events + st
  * GPT is fuckkiing slowing me down
  *
  */
+
+// Why thu version  was not returning
+/**
+  function addItemsToUI(uiTransactionItems) {
+    // for learning purposes not implementing a component for the very first
+    uiTransactionItems.map((item) => {
+      return (
+        <div className="transaction-ui-items">
+          <div className="expense-date-container">
+            <div className="expense-id">{item.typeOfTransaction}</div>
+            <div className="date-id">{item.date}</div>
+          </div>
+          <div className="amount-id">
+            {item.modeOfTransaction === "income"
+              ? `+$${item.amount}`
+              : `-$${item.amount}`}
+          </div>
+        </div>
+      );
+    });
+  }
+ */
+
+// The answer
+
+/**
+ Think of it with normal numbers
+
+This is exactly the same concept:
+
+function doubleNumbers(numbers) {
+  numbers.map((number) => {
+    return number * 2;
+  });
+}
+
+This doesn't return anything.
+
+But:
+
+function doubleNumbers(numbers) {
+  return numbers.map((number) => {
+    return number * 2;
+  });
+}
+
+returns:
+
+[2, 4, 6, 8]
+
+So your React code is essentially doing:
+
+function addItemsToUI(transactions) {
+  return transactions.map((transaction) => {
+    return <div>...</div>;
+  });
+}
+ */

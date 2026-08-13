@@ -6,7 +6,7 @@ import "./App.css";
 function App() {
   const [transaction, setTransaction] = useState({
     typeOfTransaction: "",
-    amount: "",
+    amount: 0,
     modeOfTransaction: "",
   });
   const [transactions, setTransactions] = useState([]);
@@ -24,7 +24,7 @@ function App() {
     setTransaction((prev) => {
       return {
         ...prev,
-        amount: e.target.value,
+        amount: +e.target.value,
       };
     });
 
@@ -42,8 +42,7 @@ function App() {
   }
 
   function handleModeOfTransaction(e) {
-    console.log(e.target.value);
-
+    // console.log(e.target.value);
     if (e.target.value) {
       setTransaction((prev) => {
         return {
@@ -54,13 +53,58 @@ function App() {
     }
   }
 
+  function addItemsToUI(uiTransactionItems) {
+    // for learning purposes not implementing a component for the very first
+    return uiTransactionItems.map((item) => {
+      return (
+        <div className="transaction-ui-items">
+          <div className="expense-date-container">
+            <div className="expense-id">{item.typeOfTransaction}</div>
+            <div className="date-id">{item.date}</div>
+          </div>
+          <div className="amount-id">
+            {item.modeOfTransaction === "income"
+              ? `+$${item.amount}`
+              : `-$${item.amount}`}
+          </div>
+        </div>
+      );
+    });
+  }
+
+  /** 
+<div className="transaction-ui-items">
+            <div className="expense-date-container">
+              <div className="expense-id">Salary</div>
+              <div className="date-id">Thu Aug 13 2026</div>
+            </div>
+            <div className="amount-id">+$ 5000.00</div>
+          </div>
+*/
+
   function handleClick(e) {
-    if (e.target.classList.contains("button-add")) {
-      if (document.querySelector("#income-expense").value !== "") {
-        setTransactions((prev) => {
-          return [...prev, transaction];
-        });
-      }
+    const options = {
+      weekday: "short",
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    };
+
+    if (
+      e.target.classList.contains("button-add") &&
+      transaction.modeOfTransaction !== ""
+    ) {
+      setTransactions((prev) => {
+        return [
+          ...prev,
+          {
+            ...transaction,
+            date: new Intl.DateTimeFormat("en-US", options).format(
+              new Date(Date.now()),
+            ),
+          },
+        ];
+      });
     }
   }
 
@@ -101,15 +145,20 @@ function App() {
             </select>
             <button className="button-add">+</button>
           </div>
-          {/* markup section starts here */}
-          <div className="transaction-ui-container">
+        </div>
+        {/* markup section starts here */}{" "}
+        {/* This is the part of Ui that I need to change withing each iteration of the transactions state */}
+        <div className="transaction-ui-container">
+          <div className="transaction-ui-items">
             <div className="expense-date-container">
               <div className="expense-id">Salary</div>
-              <div className="date-id">Tue Jul 2023</div>
+              <div className="date-id">Thu Aug 13 2026</div>
             </div>
             <div className="amount-id">+$ 5000.00</div>
           </div>
+          {addItemsToUI(transactions)}
         </div>
+        {/* This div ends here */}
       </div>
     </>
   );
