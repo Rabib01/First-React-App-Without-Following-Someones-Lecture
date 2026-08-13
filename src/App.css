@@ -1,0 +1,82 @@
+#root {
+  display: flex;
+}
+.parent-container {
+  width: 520px;
+  height: 2300px;
+  /* border: 1px solid red; */
+  margin: 0 auto;
+}
+
+.amount-container > * {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 900;
+}
+
+.inputs {
+  display: flex;
+  justify-content: space-between;
+}
+/* .inputs input {} this is the descendent combinator. Used for deeply neested, all childer */
+/* .inputs > input {} this is the child combinator. direct children. Will not work for nested children */
+
+.inputs input {
+  border: none;
+  background: transparent;
+  border-bottom: 2px solid #c8bfb0;
+  outline: none;
+  /* padding: 5px 0; */
+}
+
+.inputs input::placeholder {
+  color: #777;
+}
+
+/* .inputs input:focus {
+  border-bottom: 2px solid #f79e9c;
+} */
+
+#income-expense-container:focus {
+  border-bottom: 2px solid #66bb6a;
+}
+
+#amount-container:focus {
+  border-bottom: 2px solid #f79e9c;
+}
+
+.transaction-ui-container {
+  display: flex;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  padding: 10px;
+  /* border: 1px solid red; */
+  justify-content: space-between;
+  align-items: center;
+  background: #fffdf9;
+  border: 1px solid #e6ddd2;
+  /* box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1); */
+  box-shadow: 10px 9px 0px #16120d14;
+  border-radius: 8px;
+}
+
+.expense-id {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 300;
+  font-size: 20px;
+}
+
+.date-id {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 300;
+  font-size: 10px;
+  color: grey;
+  margin-top: 0.9px;
+  margin-left: 2px;
+}
+
+.amount-id {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: #66bb6a;
+}
